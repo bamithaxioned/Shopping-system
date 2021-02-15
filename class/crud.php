@@ -4,11 +4,16 @@ class Crud
     private $dbHost = "localhost";
     private $dbUsername = "phpmyadmin";
     private $dbPassword = "root";
-    private $dbName = "shoppingsystem";
+    // private $dbName = "shoppingsystem";
+    private $dbName = "";
     
     private $conn = false;
     public $mysqli;
     private $result = [];
+
+    public function setDatabaseName($dbName) {
+        $this->dbName = $dbName;
+    }
 
     #FUNCTION TO CREATE DATABASE CONNECTION.
     public function db_connect()
@@ -36,26 +41,11 @@ class Crud
         $insertQuery = "INSERT INTO $table ($tableName) VALUES ('$tableData')";
 
         if ($this->tableExists($table)) {
-            // echo "Table Exist";
             if ($this->mysqli->query($insertQuery)) {
-                // array_push($this->result, $this->mysqli->insert_id);
-?>
-                <script>
-                    alert("Data Inserted Succesfully");
-                </script>
-            <?php
                 return true;
             } else {
-                array_push($this->result, $this->mysqli->error);
-            ?>
-                <script>
-                    alert("Data was not inserted");
-                </script>
-<?php
                 return false;
             }
-        } else {
-            // echo "Table Does not Exist";
         }
     }
 

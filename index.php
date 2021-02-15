@@ -15,6 +15,7 @@ if (isset($_POST['login'])) {
     $loginEmailErr = $loginPasswordErr = "";
 
     $crud = new Crud();
+    $crud->setDatabaseName("shoppingsystem");
     $crud->db_connect();
 
     $con = $crud->mysqli;
@@ -39,7 +40,7 @@ if (isset($_POST['login'])) {
             $_SESSION['password'] = $emailArr['password'];
             $loginPasswordErr = "";
             $loginEmail = $loginPassword == "";
-              header('location:./pages/shopping.php');
+            header('location:./pages/shopping.php');
         } else {
             $loginPasswordErr = "Incorrect password.";
         }
