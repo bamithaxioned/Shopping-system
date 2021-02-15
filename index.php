@@ -56,7 +56,7 @@
                         <label for="rememberMe">Remember Me</label>
                         <input type="submit" value="Login Now" name="login" class="submit">
                     </form>
-                    <h3 class="login__user">New to Shopping System? <a href="#FIXME" class="create__account" title="Create an account">Create an account</a></h3>
+                    <h3 class="login__user">New to Shopping System? <a href="./pages/signup.php" class="create__account" title="Create an account">Create an account</a></h3>
                 </div>
             </section>
             <!--login section end-->
