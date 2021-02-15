@@ -83,8 +83,7 @@ sub { bottom: -.25em; }
 
 /*for all*/
 body {
-  box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 a { 
@@ -109,5 +108,24 @@ li {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
 }
+
+/*=================================
+  header styling starts here
+=================================*/
+header {
+  background-color: #00d2d3;
+  padding: 20px 0;
+}
+
+.header__heading {
+  font-size: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 2px 2px #000;
+}
+/*=================================
+  header styling ends here
+=================================*/
