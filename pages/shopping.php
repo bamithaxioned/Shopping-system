@@ -39,7 +39,7 @@
             <div class="wrapper">
                 <h1 class="header__heading">Welcome to Shopping System</h1>
                 <div class="logout-btn">
-                    <a href="./logout.php">Logout</a>
+                    <a href="./logout.php" class="logout" title="Logout">Logout</a>
                 </div>
             </div>
         </header>

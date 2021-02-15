@@ -150,7 +150,8 @@ header {
 
 form { width: 100%; }
 
-input[type="text"] {
+input[type="text"],
+input[type="password"] {
   width: 100%;
   padding: 4px 10px;
   outline: none;
@@ -202,3 +203,18 @@ input[type="text"] {
 /*=================================
   signup styling ends here
 =================================*/
+
+.header .wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logout {
+  color: #000;
+  letter-spacing: 1px;
+}
+
+.logout:hover {
+  color: #333;
+}
