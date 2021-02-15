@@ -10,7 +10,7 @@ class Validation
     public $contactRegex = "/^[0-9]+$/";
     public $passwordRegex = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,20})/";
 
-    public function assignValue($name, $email, $password, $cnfPassword, $contact, $address)
+    public function assignValue($name, $email, $password, $cnfPassword, $contact)
     {
         $this->name = $name;
         $this->email = $email;
