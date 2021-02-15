@@ -97,7 +97,7 @@ if (isset($_POST['login'])) {
                         <input type="text" name="loginEmail" id="email" value="<?php echo $loginEmail; ?>" />
                         <span class="error"><?php echo $loginEmailErr; ?></span>
                         <label for="password">Password:</label>
-                        <input type="text" name="loginPassword" id="password" value="<?php echo $loginPassword; ?>" />
+                        <input type="password" name="loginPassword" id="password" value="<?php echo $loginPassword; ?>" />
                         <span class="error"><?php echo $loginPasswordErr; ?></span>
                         <input type="submit" value="Login Now" name="login" class="submit">
                     </form>
