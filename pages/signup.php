@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once "../class/validation.php";
+    require_once "../Database/database.php";
     
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (isset($_POST['signup'])) {
