@@ -9,7 +9,7 @@ class Database
     private $dbName = "shoppingsystem";
 
     private $conn = false;
-    private $mysqli;
+    public $mysqli;
 
     public function db_connect()
     {
