@@ -1,5 +1,43 @@
 <?php
-    session_start();
+session_start();
+require_once "../class/validation.php";
+require_once "../class/crud.php";
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (isset($_POST['signup'])) {
+        $name = trim($_POST['name']);
+        $email = trim($_POST['email']);
+        $password = $_POST['password'];
+        $cnfPassword = $_POST['cnfPassword'];
+        $contact = trim($_POST['contact']);
+
+        #PASSWORD ENCRYPTION
+        $encPass = password_hash($password, PASSWORD_BCRYPT);
+        $encCPass = password_hash($cnfPassword, PASSWORD_BCRYPT);
+
+        #CREATING OBJECT OF VALIDATION.
+        $validate = new Validation();
+        $validate->assignValue($name, $email, $password, $cnfPassword, $contact);
+        $validate->validateName();
+        $validate->validateEmail();
+        $validate->validatePassword();
+        $validate->validateConfirmPassword();
+        $validate->validateContact();
+
+        if ($validate->nameErr == "" && $validate->emailErr == "" && $validate->passwordErr == "" && $validate->cnfPasswordErr == "" && $validate->contactErr == "") {
+
+?>
+            <script>
+                alert("Thank you for creating your account");
+            </script>
+<?php
+            $crud = new Crud();
+            $crud->db_connect();
+            $crud->insert("registration", ['name' => "$name", 'email' => "$email", 'password' => "$encPass", 'cpassword' => "$encCPass", 'contact' => "$contact"]);
+            $validate->name = $validate->email = $validate->password = $validate->cnfPassword = $validate->contact = "";
+        }
+    }
+}
 ?>
 
 <!doctype html>
@@ -47,20 +85,20 @@
                     <h2 class="registration__heading">Create Account</h2>
                     <form action="<?php htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
                         <label for="fname">Your Name:</label>
-                        <input type="text" name="name" id="name" value="" placeholder="Name" />
-                        <span class="error"></span>
+                        <input type="text" name="name" id="name" value="<?php echo $validate->name; ?>" placeholder="Name" />
+                        <span class="error"><?php echo $validate->nameErr; ?></span>
                         <label for="email">Email:</label>
-                        <input type="text" name="email" id="email" value="" placeholder="Email" />
-                        <span class="error"></span>
+                        <input type="text" name="email" id="email" value="<?php echo $validate->email; ?>" placeholder="Email" />
+                        <span class="error"><?php echo $validate->emailErr; ?></span>
                         <label for="password">Password:</label>
-                        <input type="text" name="password" id="password" value="" placeholder="Password" />
-                        <span class="error"></span>
+                        <input type="text" name="password" id="password" value="<?php echo $validate->password; ?>" placeholder="Password" />
+                        <span class="error"><?php echo $validate->passwordErr; ?></span>
                         <label for="cnfPassword">Confirm Password:</label>
-                        <input type="text" name="cnfPassword" id="cnfPassword" value="" placeholder="Confirm Password" />
-                        <span class="error"></span>
+                        <input type="text" name="cnfPassword" id="cnfPassword" value="<?php echo $validate->cnfPassword; ?>" placeholder="Confirm Password" />
+                        <span class="error"><?php echo $validate->cnfPasswordErr; ?></span>
                         <label for="contact">Mobile Number:</label>
-                        <input type="text" name="contact" id="contact" value="" placeholder="Mobile Number" />
-                        <span class="error"></span>
+                        <input type="text" name="contact" id="contact" value="<?php echo $validate->contact; ?>" placeholder="Mobile Number" />
+                        <span class="error"><?php echo $validate->contactErr; ?></span>
                         <input type="submit" value="Sign Up" name="signup" class="submit">
                     </form>
                     <h3 class="login__user">Already have an account? <a href="../index.php" class="create__account" title="Sign In">Sign In</a></h3>
