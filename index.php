@@ -1,6 +1,9 @@
 <?php
 session_start();
 require_once "./class/crud.php";
+if(isset($_SESSION['email']) && isset($_SESSION['password'])) {
+    header("location:./pages/shopping.php");
+}
 
 if (isset($_POST['login'])) {
     #GRABBING VALUES
@@ -23,19 +26,22 @@ if (isset($_POST['login'])) {
     if ($emailCount) {
         $loginEmailErr = "";
         $emailArr = mysqli_fetch_assoc($query);
-        $dbPass = $emailArr['password'];;
+        print_r($emailArr);
+        $dbPass = $emailArr['password'];
         
-        // $_SESSION['name'] = $emailArr['firstName'] . " " . $emailArr['lastName'];
-        // $_SESSION['email'] = $emailArr['email'];
-        // 
-        // $checkPassword = password_verify($loginPassword, $dbPass);
-        // password
-        if ($dbPass) {
+        $_SESSION['name'] = $emailArr['name'];
+        $_SESSION['email'] = $emailArr['email'];
+        $_SESSION['password'] = $emailArr['password'];
+ 
+        if ($loginPassword === $dbPass) {
           $loginPasswordErr = "";
           header('location:./pages/shopping.php');
         } else {
           $loginPasswordErr = "Incorrect password.";
         }
+    } else {
+        $loginEmailErr = "Please enter your registered email.";
+
     }
 }
 
@@ -100,7 +106,7 @@ if (isset($_POST['login'])) {
             <!--login section end-->
         </main>
         <!--main section end-->
-        
+
     </div>
     <!--container end-->
 
