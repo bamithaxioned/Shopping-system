@@ -1,5 +1,45 @@
 <?php
-    session_start();
+session_start();
+require_once "./class/crud.php";
+
+if (isset($_POST['login'])) {
+    #GRABBING VALUES
+    $loginEmail = $_POST['loginEmail'];
+    $loginPassword = $_POST['loginPassword'];
+    $rememberMe = $_POST['rememberMe'];
+
+    #Error for Email and Password for login
+    $loginEmailErr = $loginPasswordErr = "";
+
+    $crud = new Crud();
+    $crud->db_connect();
+
+    $con = $crud->mysqli;
+    #grabbing Email from database
+    $emailCheck = "select * from registration where email = '$loginEmail'";
+    $query = mysqli_query($con, $emailCheck);
+    $emailCount = mysqli_num_rows($query);
+
+    if ($emailCount) {
+        $loginEmailErr = "";
+        $emailArr = mysqli_fetch_assoc($query);
+        $dbPass = $emailArr['password'];;
+        
+        // $_SESSION['name'] = $emailArr['firstName'] . " " . $emailArr['lastName'];
+        // $_SESSION['email'] = $emailArr['email'];
+        // 
+        // $checkPassword = password_verify($loginPassword, $dbPass);
+        // password
+        if ($dbPass) {
+          $loginPasswordErr = "";
+          header('location:./pages/shopping.php');
+        } else {
+          $loginPasswordErr = "Incorrect password.";
+        }
+    }
+}
+
+
 ?>
 
 <!doctype html>
@@ -47,11 +87,11 @@
                     <h2 class="login__heading">Login Here</h2>
                     <form action="<?php htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
                         <label for="email">Email:</label>
-                        <input type="text" name="loginEmail" id="email" value="" />
-                        <span class="error"></span>
+                        <input type="text" name="loginEmail" id="email" value="<?php echo $loginEmail; ?>" />
+                        <span class="error"><?php echo $loginEmailErr; ?></span>
                         <label for="password">Password:</label>
-                        <input type="text" name="loginPassword" id="password" value="" />
-                        <span class="error"></span>
+                        <input type="text" name="loginPassword" id="password" value="<?php echo $loginPassword; ?>" />
+                        <span class="error"><<?php echo $loginPasswordErr; ?>/span>
                         <input type="submit" value="Login Now" name="login" class="submit">
                     </form>
                     <h3 class="login__user">New to Shopping System? <a href="./pages/signup.php" class="create__account" title="Create an account">Create an account</a></h3>
@@ -60,7 +100,7 @@
             <!--login section end-->
         </main>
         <!--main section end-->
-
+        
     </div>
     <!--container end-->
 

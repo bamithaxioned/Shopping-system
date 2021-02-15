@@ -7,7 +7,7 @@ class Crud
     private $dbName = "shoppingsystem";
     
     private $conn = false;
-    private $mysqli;
+    public $mysqli;
     private $result = [];
 
     #FUNCTION TO CREATE DATABASE CONNECTION.
