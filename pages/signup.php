@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "../class/validation.php";
-require_once "../Database/database.php";
+require_once "../class/crud.php";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['signup'])) {
@@ -27,8 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 alert("Thank you for creating your account");
             </script>
 <?php
-            
-            // $validate->name = $validate->email = $validate->password = $validate->cnfPassword = $validate->contact = "";
+            $crud = new Crud();
+            $crud->db_connect();
+
+            $crud->insert("registration", ['name' => "$name", 'email' => "$email", 'password' => "$password", 'cpassword' => "$cnfPassword", 'contact' => "$contact"]);
+            $validate->name = $validate->email = $validate->password = $validate->cnfPassword = $validate->contact = "";
         }
     }
 }
