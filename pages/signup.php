@@ -26,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         if ($validate->nameErr == "" && $validate->emailErr == "" && $validate->passwordErr == "" && $validate->cnfPasswordErr == "" && $validate->contactErr == "") {
             $crud = new Crud();
-            $crud->setDatabaseName("shoppingsystem");
             $crud->db_connect();
 
             // EMAIL QUERY

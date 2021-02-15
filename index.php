@@ -15,7 +15,6 @@ if (isset($_POST['login'])) {
     $loginEmailErr = $loginPasswordErr = "";
 
     $crud = new Crud();
-    $crud->setDatabaseName("shoppingsystem");
     $crud->db_connect();
 
     $con = $crud->mysqli;
@@ -48,7 +47,6 @@ if (isset($_POST['login'])) {
         $loginEmailErr = "Please enter your registered email.";
     }
 }
-
 ?>
 
 <!doctype html>

@@ -4,16 +4,11 @@ class Crud
     private $dbHost = "localhost";
     private $dbUsername = "phpmyadmin";
     private $dbPassword = "root";
-    // private $dbName = "shoppingsystem";
-    private $dbName = "";
+    private $dbName = "shoppingsystem";
     
     private $conn = false;
     public $mysqli;
     private $result = [];
-
-    public function setDatabaseName($dbName) {
-        $this->dbName = $dbName;
-    }
 
     #FUNCTION TO CREATE DATABASE CONNECTION.
     public function db_connect()
