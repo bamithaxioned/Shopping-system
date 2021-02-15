@@ -1,31 +1,37 @@
 <?php
-    session_start();
-    require_once "../class/validation.php";
-    require_once "../Database/database.php";
-    
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        if (isset($_POST['signup'])) {
-            $name = trim($_POST['name']);
-            $email = trim($_POST['email']);
-            $password = $_POST['password'];
-            $cnfPassword = $_POST['cnfPassword'];
-            $contact = trim($_POST['contact']);
+session_start();
+require_once "../class/validation.php";
+require_once "../Database/database.php";
+
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    if (isset($_POST['signup'])) {
+        $name = trim($_POST['name']);
+        $email = trim($_POST['email']);
+        $password = $_POST['password'];
+        $cnfPassword = $_POST['cnfPassword'];
+        $contact = trim($_POST['contact']);
+
+        #CREATING OBJECT OF VALIDATION.
+        $validate = new Validation();
+        $validate->assignValue($name, $email, $password, $cnfPassword, $contact);
+        $validate->validateName();
+        $validate->validateEmail();
+        $validate->validatePassword();
+        $validate->validateConfirmPassword();
+        $validate->validateContact();
+
+        if ($validate->nameErr == "" && $validate->emailErr == "" && $validate->passwordErr == "" && $validate->cnfPasswordErr == "" && $validate->contactErr == "") {
+
+?>
+            <script>
+                alert("Thank you for creating your account");
+            </script>
+<?php
             
-            #CREATING OBJECT OF VALIDATION.
-            $validate = new Validation();
-            $validate->assignValue($name, $email, $password, $cnfPassword, $contact);
-            $validate->validateName();
-            $validate->validateEmail();
-            $validate->validatePassword();
-            $validate->validateConfirmPassword();
-            $validate->validateContact();
-            
-            if ($validate->nameErr == "" && $validate->emailErr == "" && $validate->passwordErr == "" && $validate->cnfPasswordErr == "" && $validate->contactErr == "") {
-                
-                // $validate->name = $validate->email = $validate->password = $validate->cnfPassword = $validate->contact = "";
-            }
+            // $validate->name = $validate->email = $validate->password = $validate->cnfPassword = $validate->contact = "";
         }
     }
+}
 ?>
 
 <!doctype html>
@@ -85,7 +91,7 @@
                         <input type="text" name="cnfPassword" id="cnfPassword" value="<?php echo $validate->cnfPassword; ?>" placeholder="Confirm Password" />
                         <span class="error"><?php echo $validate->cnfPasswordErr; ?></span>
                         <label for="contact">Mobile Number:</label>
-                        <input type="text" name="contact" id="contact" value="<?php echo $validate->contact ;?>" placeholder="Mobile Number" />
+                        <input type="text" name="contact" id="contact" value="<?php echo $validate->contact; ?>" placeholder="Mobile Number" />
                         <span class="error"><?php echo $validate->contactErr; ?></span>
                         <input type="submit" value="Sign Up" name="signup" class="submit">
                     </form>
