@@ -39,7 +39,7 @@ if (isset($_POST['login'])) {
             $_SESSION['password'] = $emailArr['password'];
             $loginPasswordErr = "";
             $loginEmail = $loginPassword == "";
-              header('location:./pages/shopping.php');
+            header('location:./pages/shopping.php');
         } else {
             $loginPasswordErr = "Incorrect password.";
         }
@@ -47,7 +47,6 @@ if (isset($_POST['login'])) {
         $loginEmailErr = "Please enter your registered email.";
     }
 }
-
 ?>
 
 <!doctype html>

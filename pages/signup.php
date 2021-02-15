@@ -25,16 +25,27 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $validate->validateContact();
 
         if ($validate->nameErr == "" && $validate->emailErr == "" && $validate->passwordErr == "" && $validate->cnfPasswordErr == "" && $validate->contactErr == "") {
-
-?>
-            <script>
-                alert("Thank you for creating your account");
-            </script>
-<?php
             $crud = new Crud();
             $crud->db_connect();
-            $crud->insert("registration", ['name' => "$name", 'email' => "$email", 'password' => "$encPass", 'cpassword' => "$encCPass", 'contact' => "$contact"]);
-            $validate->name = $validate->email = $validate->password = $validate->cnfPassword = $validate->contact = "";
+
+            // EMAIL QUERY
+            $con = $crud->mysqli;
+            $emailQuery = "select * from registration where email = '$email'";
+            $query = mysqli_query($con, $emailQuery);
+            $emailCount = mysqli_num_rows($query);
+
+            if ($emailCount > 0) {
+                $validate->emailErr = "Email Already Exists";
+            } else {
+?>
+                <script>
+                    alert("Thank you for creating your account");
+                </script>
+<?php
+                $validate->emailErr = "";
+                $crud->insert("registration", ['name' => "$name", 'email' => "$email", 'password' => "$encPass", 'cpassword' => "$encCPass", 'contact' => "$contact"]);
+                $validate->name = $validate->email = $validate->password = $validate->cnfPassword = $validate->contact = "";
+            }
         }
     }
 }

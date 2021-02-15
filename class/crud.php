@@ -36,26 +36,11 @@ class Crud
         $insertQuery = "INSERT INTO $table ($tableName) VALUES ('$tableData')";
 
         if ($this->tableExists($table)) {
-            // echo "Table Exist";
             if ($this->mysqli->query($insertQuery)) {
-                // array_push($this->result, $this->mysqli->insert_id);
-?>
-                <script>
-                    alert("Data Inserted Succesfully");
-                </script>
-            <?php
                 return true;
             } else {
-                array_push($this->result, $this->mysqli->error);
-            ?>
-                <script>
-                    alert("Data was not inserted");
-                </script>
-<?php
                 return false;
             }
-        } else {
-            // echo "Table Does not Exist";
         }
     }
 
