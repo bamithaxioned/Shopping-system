@@ -44,7 +44,7 @@
             <!--login section start-->
             <section class="login">
                 <div class="wrapper">
-                    <h2 class="login__heading">Login</h2>
+                    <h2 class="login__heading">Login Here</h2>
                     <form action="<?php htmlentities($_SERVER['PHP_SELF']); ?>" method="POST">
                         <label for="email">Email:</label>
                         <input type="text" name="loginEmail" id="email" value="" />
@@ -52,8 +52,6 @@
                         <label for="password">Password:</label>
                         <input type="text" name="loginPassword" id="password" value="" />
                         <span class="error"></span>
-                        <input type="checkbox" name="rememberMe" id="rememberMe">
-                        <label for="rememberMe">Remember Me</label>
                         <input type="submit" value="Login Now" name="login" class="submit">
                     </form>
                     <h3 class="login__user">New to Shopping System? <a href="./pages/signup.php" class="create__account" title="Create an account">Create an account</a></h3>
