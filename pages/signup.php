@@ -11,6 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $cnfPassword = $_POST['cnfPassword'];
         $contact = trim($_POST['contact']);
 
+        #PASSWORD ENCRYPTION
+        $encPass = password_hash($password, PASSWORD_BCRYPT);
+        $encCPass = password_hash($cnfPassword, PASSWORD_BCRYPT);
+
         #CREATING OBJECT OF VALIDATION.
         $validate = new Validation();
         $validate->assignValue($name, $email, $password, $cnfPassword, $contact);
@@ -29,8 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <?php
             $crud = new Crud();
             $crud->db_connect();
-
-            $crud->insert("registration", ['name' => "$name", 'email' => "$email", 'password' => "$password", 'cpassword' => "$cnfPassword", 'contact' => "$contact"]);
+            $crud->insert("registration", ['name' => "$name", 'email' => "$email", 'password' => "$encPass", 'cpassword' => "$encCPass", 'contact' => "$contact"]);
             $validate->name = $validate->email = $validate->password = $validate->cnfPassword = $validate->contact = "";
         }
     }

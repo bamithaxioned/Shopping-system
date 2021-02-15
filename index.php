@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "./class/crud.php";
-if(isset($_SESSION['email']) && isset($_SESSION['password'])) {
+if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
     header("location:./pages/shopping.php");
 }
 
@@ -26,25 +26,27 @@ if (isset($_POST['login'])) {
     if ($emailCount) {
         $loginEmailErr = "";
         $emailArr = mysqli_fetch_assoc($query);
-        print_r($emailArr);
         $dbPass = $emailArr['password'];
-        
+
         $_SESSION['name'] = $emailArr['name'];
         $_SESSION['email'] = $emailArr['email'];
-        $_SESSION['password'] = $emailArr['password'];
- 
-        if ($loginPassword === $dbPass) {
-          $loginPasswordErr = "";
-          header('location:./pages/shopping.php');
+
+        $checkPassword = password_verify($loginPassword, $dbPass);
+
+        if (empty($loginPassword)) {
+            $loginPasswordErr = "Password cannot be empty";
+        } elseif ($checkPassword) {
+            $_SESSION['password'] = $emailArr['password'];
+            $loginPasswordErr = "";
+            $loginEmail = $loginPassword == "";
+              header('location:./pages/shopping.php');
         } else {
-          $loginPasswordErr = "Incorrect password.";
+            $loginPasswordErr = "Incorrect password.";
         }
     } else {
         $loginEmailErr = "Please enter your registered email.";
-
     }
 }
-
 
 ?>
 
@@ -97,7 +99,7 @@ if (isset($_POST['login'])) {
                         <span class="error"><?php echo $loginEmailErr; ?></span>
                         <label for="password">Password:</label>
                         <input type="text" name="loginPassword" id="password" value="<?php echo $loginPassword; ?>" />
-                        <span class="error"><<?php echo $loginPasswordErr; ?>/span>
+                        <span class="error"><?php echo $loginPasswordErr; ?></span>
                         <input type="submit" value="Login Now" name="login" class="submit">
                     </form>
                     <h3 class="login__user">New to Shopping System? <a href="./pages/signup.php" class="create__account" title="Create an account">Create an account</a></h3>
