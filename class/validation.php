@@ -2,7 +2,6 @@
 #CLASS FOR VALIDATING SIGN UP FORM
 class Validation
 {
-    public $name, $email, $password, $cnfPassword, $contact, $nameErr, $emailErr, $passwordErr, $cnfPasswordErr, $contactErr;
 
     #REGULAR EXPRESSIONS.
     public $nameRegex = "/^[a-zA-z\s]*$/";
@@ -27,7 +26,7 @@ class Validation
             $this->nameErr = "Name cannot be empty.";
         } elseif (strlen($this->name) < 2 || strlen($this->name) > 30) {
             $this->nameErr = "First Name should be between 2 - 30 characters";
-        } elseif (!preg_match($this->nameRegex, $this->Name)) {
+        } elseif (!preg_match($this->nameRegex, $this->name)) {
             $this->nameErr = "First Name should not contain any special character, whitespace or numbers.";
         } else {
             $this->nameErr = "";
