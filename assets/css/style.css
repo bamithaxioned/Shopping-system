@@ -110,22 +110,98 @@ li {
   box-sizing: border-box;
 }
 
+/* Common Classes */
+.text-center {
+  text-align: center;
+}
+
 /*=================================
   header styling starts here
 =================================*/
 header {
-  background-color: #00d2d3;
   padding: 20px 0;
+  background-color: #00d2d3;
 }
 
 .header__heading {
+  color: #fff;
   font-size: 30px;
   font-weight: 600;
-  text-transform: uppercase;
-  text-align: center;
-  color: #fff;
   text-shadow: 2px 2px 2px #000;
+  text-transform: uppercase;
 }
 /*=================================
   header styling ends here
+=================================*/
+
+/*=================================
+  signup styling starts here
+=================================*/
+.registration,
+.login {
+  background-color: #718093;
+  padding: 20px 0;
+}
+
+.login__heading,
+.registration__heading {
+  color: #fff;
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+form { width: 100%; }
+
+input[type="text"] {
+  width: 100%;
+  padding: 4px 10px;
+  outline: none;
+  margin: 6px 0;
+  display: block;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.error {
+  display: block;
+  color: red;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+::placeholder { font-size: 15px; }
+
+.submit {
+  display: block;
+  padding: 8px 14px;
+  outline: none;
+  border: none;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-family: 'Poppins', sans-serif;
+  margin: 13px 0px;
+  background-color: #000;
+  color: #00d2d3;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: .3s;
+}
+
+.submit:hover {
+  background-color: #00d2d3;
+  color: #000;
+}
+
+.create__account {
+  color: #000;
+  font-weight: 500;
+}
+
+.create__account:hover {
+  color: #fff;
+}
+/*=================================
+  signup styling ends here
 =================================*/
