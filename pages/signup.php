@@ -102,10 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         <input type="text" name="email" id="email" value="<?php echo $validate->email; ?>" placeholder="Email" />
                         <span class="error"><?php echo $validate->emailErr; ?></span>
                         <label for="password">Password:</label>
-                        <input type="text" name="password" id="password" value="<?php echo $validate->password; ?>" placeholder="Password" />
+                        <input type="password" name="password" id="password" value="<?php echo $validate->password; ?>" placeholder="Password" />
                         <span class="error"><?php echo $validate->passwordErr; ?></span>
                         <label for="cnfPassword">Confirm Password:</label>
-                        <input type="text" name="cnfPassword" id="cnfPassword" value="<?php echo $validate->cnfPassword; ?>" placeholder="Confirm Password" />
+                        <input type="password" name="cnfPassword" id="cnfPassword" value="<?php echo $validate->cnfPassword; ?>" placeholder="Confirm Password" />
                         <span class="error"><?php echo $validate->cnfPasswordErr; ?></span>
                         <label for="contact">Mobile Number:</label>
                         <input type="text" name="contact" id="contact" value="<?php echo $validate->contact; ?>" placeholder="Mobile Number" />
